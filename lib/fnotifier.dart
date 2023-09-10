@@ -1,7 +1,7 @@
 import 'types.dart';
 import 'listenable.dart';
 
-class FChangeNotifier implements FListenable {
+class FChangeNotifier extends Object implements FListenable {
   int _count = 0;
   static final List<VoidCallback?> _emptyListeners =
       List<VoidCallback?>.filled(0, null);

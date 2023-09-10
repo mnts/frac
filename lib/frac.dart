@@ -75,6 +75,14 @@ class Fra<T> extends FChangeNotifier with Fr<T> {
   }
 }
 
+extension FracNullExt on Frac<Object?> {
+  bool get isNull => value == null;
+}
+
+extension FracNumExt on Frac<num?> {
+  bool get isZero => value == null || value == 0;
+}
+
 class Frac<V> extends Fra implements FValueListenable<V> {
   V _value;
   Frac(this._value);
@@ -88,7 +96,7 @@ class Frac<V> extends Fra implements FValueListenable<V> {
 
   @override
   set value(covariant V val) {
-    if (val != null && val != _value) {
+    if (val != _value) {
       _value = val;
       notifyListeners();
     }
