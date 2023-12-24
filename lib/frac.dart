@@ -98,6 +98,9 @@ class Frac<V> extends Fra implements FValueListenable<V> {
   set value(covariant V val) {
     if (val != _value) {
       _value = val;
+      if (val == 0) {
+        print('wrf');
+      }
       notifyListeners();
     }
   }
@@ -140,5 +143,9 @@ class SelfFrac extends Fra {
 }
 
 extension FracBool on Frac<bool> {
-  bool get isTrue => value == true;
+  bool get isTrue => value;
+
+  toggle() {
+    value = !value;
+  }
 }
