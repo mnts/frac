@@ -4,11 +4,17 @@ class TimedF {
   Timer? _timer;
   //final pointers = <Pointer>[];
 
-  hold(void Function() fn) {
+  Completer? c;
+  Future hold(Function() fn, [int ms = 400]) {
     _timer?.cancel();
+    c ??= Completer();
     _timer = Timer(
-      const Duration(milliseconds: 400),
-      fn,
+      Duration(milliseconds: ms),
+      () {
+        c!.complete(fn());
+        c = null;
+      },
     );
+    return c!.future;
   }
 }
