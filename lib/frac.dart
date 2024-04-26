@@ -98,9 +98,11 @@ class Frac<V> extends Fra implements FValueListenable<V> {
   set value(covariant V val) {
     if (val != _value) {
       _value = val;
+      /*
       if (val == 0) {
         print('wrf');
       }
+      */
       notifyListeners();
     }
   }
