@@ -5,14 +5,16 @@ class TimedF {
   //final pointers = <Pointer>[];
 
   Completer? c;
-  Future hold(Function() fn, [int ms = 400]) {
+  Future hold(FutureOr Function() fn, [int ms = 400]) {
     _timer?.cancel();
     c ??= Completer();
     _timer = Timer(
       Duration(milliseconds: ms),
-      () {
-        c!.complete(fn());
+      () async {
+        final cr = c!;
         c = null;
+        final r = await fn();
+        cr.complete(r);
       },
     );
     return c!.future;
