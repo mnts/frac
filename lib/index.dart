@@ -1,3 +1,4 @@
+export 'completer.dart';
 export 'fnotifier.dart';
 export 'frac.dart';
 export 'listenable.dart';
