@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 
 import 'index.dart';
@@ -5,14 +6,15 @@ import 'index.dart';
 mixin class CompleterF<K extends Object> {
   final timer = TimedF();
   final tasks = <K, Completer>{};
-  int ms = 40;
+  int ms = 10;
 
   late Future Function() cb;
 
   Future hold(K key) {
     if (tasks[key] case Completer comp) return comp.future;
     final comp = tasks[key] = Completer();
-    timer.hold(cb, ms).then((d) {
+    timer.hold(cb, ms).then((d) async {
+      await d;
       final rem = <K>[];
       for (var en in tasks.entries) {
         tasks[en.key]?.complete();
@@ -25,3 +27,5 @@ mixin class CompleterF<K extends Object> {
     return comp.future;
   }
 }
+
+*/
